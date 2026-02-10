@@ -135,6 +135,70 @@ To customize CMake options:
 2. Navigate to **Build, Execution, Deployment → CMake**
 3. Add options in **CMake options** field if needed
 
+## Code Quality Tools
+
+This project uses `clang-tidy` and `clang-format` for code quality and consistency.
+
+### Prerequisites
+
+Install LLVM/Clang tools:
+- **macOS**: `brew install llvm` (includes clang-tidy and clang-format)
+- **Ubuntu/Debian**: `sudo apt-get install clang-tidy clang-format`
+- **Fedora**: `sudo dnf install clang-tools-extra`
+
+### clang-tidy
+
+**Automatic Integration:**
+CMake automatically detects and enables clang-tidy during the build process. Warnings will appear during compilation.
+
+**Manual Usage:**
+```bash
+# Run on all source files
+clang-tidy src/*.cpp include/*.hpp tests/*.cpp -- -Iinclude
+
+# Run with automatic fixes (use with caution)
+clang-tidy src/*.cpp --fix -- -Iinclude
+
+# Run specific checks only
+clang-tidy src/*.cpp -checks='cppcoreguidelines-*,modernize-*' -- -Iinclude
+```
+
+**Configuration:**
+- Config file: `.clang-tidy`
+- Enables most checks by default
+- Excludes vendor-specific and overly strict checks
+- Configured for C++17
+
+### clang-format
+
+**Format all source files:**
+```bash
+# Format in place
+clang-format -i src/*.cpp include/*.hpp tests/*.cpp
+
+# Check if files are formatted (CI-friendly)
+clang-format --dry-run --Werror src/*.cpp include/*.hpp tests/*.cpp
+```
+
+**Configuration:**
+- Config file: `.clang-format`
+- Based on LLVM style
+- 4-space indentation
+- 120 character line limit
+- Right-aligned pointers
+
+### CLion Integration
+
+Both tools are automatically integrated with CLion:
+
+**clang-tidy:**
+- Warnings appear as you type
+- Navigate to **Settings → Editor → Inspections → C/C++ → Clang-Tidy**
+
+**clang-format:**
+- Use **Code → Reformat Code** (Cmd+Option+L on macOS, Ctrl+Alt+L on Linux/Windows)
+- Configure in **Settings → Editor → Code Style → C/C++ → Gear Icon → Import Scheme → .clang-format file**
+
 ## Project Structure
 
 ```

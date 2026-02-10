@@ -1,0 +1,765 @@
+Start testing: Feb 09 19:27 PST
+----------------------------------------------------------
+1/27 Testing: MSVBasicTest.ConstantAllOnes
+1/27 Test: MSVBasicTest.ConstantAllOnes
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.ConstantAllOnes" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.ConstantAllOnes" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.ConstantAllOnes
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.ConstantAllOnes
+[       OK ] MSVBasicTest.ConstantAllOnes (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.ConstantAllOnes" end time: Feb 09 19:27 PST
+"MSVBasicTest.ConstantAllOnes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/27 Testing: MSVBasicTest.ConstantAllTwos
+2/27 Test: MSVBasicTest.ConstantAllTwos
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.ConstantAllTwos" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.ConstantAllTwos" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.ConstantAllTwos
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.ConstantAllTwos
+[       OK ] MSVBasicTest.ConstantAllTwos (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.ConstantAllTwos" end time: Feb 09 19:27 PST
+"MSVBasicTest.ConstantAllTwos" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/27 Testing: MSVBasicTest.SinglePositionModel
+3/27 Test: MSVBasicTest.SinglePositionModel
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.SinglePositionModel" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.SinglePositionModel" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.SinglePositionModel
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.SinglePositionModel
+[       OK ] MSVBasicTest.SinglePositionModel (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.SinglePositionModel" end time: Feb 09 19:27 PST
+"MSVBasicTest.SinglePositionModel" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/27 Testing: MSVBasicTest.SingleResidueSequence
+4/27 Test: MSVBasicTest.SingleResidueSequence
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.SingleResidueSequence" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.SingleResidueSequence" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.SingleResidueSequence
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.SingleResidueSequence
+[       OK ] MSVBasicTest.SingleResidueSequence (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.SingleResidueSequence" end time: Feb 09 19:27 PST
+"MSVBasicTest.SingleResidueSequence" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/27 Testing: MSVBasicTest.AlternatingPattern
+5/27 Test: MSVBasicTest.AlternatingPattern
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.AlternatingPattern" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.AlternatingPattern" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.AlternatingPattern
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.AlternatingPattern
+[       OK ] MSVBasicTest.AlternatingPattern (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.AlternatingPattern" end time: Feb 09 19:27 PST
+"MSVBasicTest.AlternatingPattern" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/27 Testing: MSVBasicTest.AllSameResidue
+6/27 Test: MSVBasicTest.AllSameResidue
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.AllSameResidue" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.AllSameResidue" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.AllSameResidue
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.AllSameResidue
+/Users/mamelara/JGI/NESAP/msv-filter/tests/test_msv_basic.cpp:65: Failure
+The difference between TestCase::EXPECTED_SCORE and actual_score is 4, which exceeds 0.001f, where
+TestCase::EXPECTED_SCORE evaluates to 3,
+actual_score evaluates to -1, and
+0.001f evaluates to 0.0010000000474974513.
+MSV score mismatch for test case: all_same_residue_model
+
+[  FAILED  ] MSVBasicTest.AllSameResidue (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] MSVBasicTest.AllSameResidue
+
+ 1 FAILED TEST
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"MSVBasicTest.AllSameResidue" end time: Feb 09 19:27 PST
+"MSVBasicTest.AllSameResidue" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/27 Testing: MSVBasicTest.AllDifferentResidues
+7/27 Test: MSVBasicTest.AllDifferentResidues
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.AllDifferentResidues" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.AllDifferentResidues" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.AllDifferentResidues
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.AllDifferentResidues
+[       OK ] MSVBasicTest.AllDifferentResidues (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.AllDifferentResidues" end time: Feb 09 19:27 PST
+"MSVBasicTest.AllDifferentResidues" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/27 Testing: MSVBasicTest.ShorterSequence
+8/27 Test: MSVBasicTest.ShorterSequence
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.ShorterSequence" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.ShorterSequence" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.ShorterSequence
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.ShorterSequence
+[       OK ] MSVBasicTest.ShorterSequence (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.ShorterSequence" end time: Feb 09 19:27 PST
+"MSVBasicTest.ShorterSequence" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/27 Testing: MSVBasicTest.LongerSequence
+9/27 Test: MSVBasicTest.LongerSequence
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.LongerSequence" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.LongerSequence" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.LongerSequence
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.LongerSequence
+[       OK ] MSVBasicTest.LongerSequence (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.LongerSequence" end time: Feb 09 19:27 PST
+"MSVBasicTest.LongerSequence" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/27 Testing: MSVBasicTest.MixedScores
+10/27 Test: MSVBasicTest.MixedScores
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.MixedScores" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.MixedScores" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.MixedScores
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.MixedScores
+[       OK ] MSVBasicTest.MixedScores (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.MixedScores" end time: Feb 09 19:27 PST
+"MSVBasicTest.MixedScores" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/27 Testing: MSVBasicTest.VerifyTestVectors
+11/27 Test: MSVBasicTest.VerifyTestVectors
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.VerifyTestVectors" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.VerifyTestVectors" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.VerifyTestVectors
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.VerifyTestVectors
+[       OK ] MSVBasicTest.VerifyTestVectors (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.VerifyTestVectors" end time: Feb 09 19:27 PST
+"MSVBasicTest.VerifyTestVectors" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/27 Testing: MSVBasicTest.VerifyAlternatingPattern
+12/27 Test: MSVBasicTest.VerifyAlternatingPattern
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.VerifyAlternatingPattern" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.VerifyAlternatingPattern" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.VerifyAlternatingPattern
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.VerifyAlternatingPattern
+[       OK ] MSVBasicTest.VerifyAlternatingPattern (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.VerifyAlternatingPattern" end time: Feb 09 19:27 PST
+"MSVBasicTest.VerifyAlternatingPattern" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/27 Testing: MSVBasicTest.VerifyAllSameResidue
+13/27 Test: MSVBasicTest.VerifyAllSameResidue
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVBasicTest.VerifyAllSameResidue" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVBasicTest.VerifyAllSameResidue" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVBasicTest.VerifyAllSameResidue
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVBasicTest
+[ RUN      ] MSVBasicTest.VerifyAllSameResidue
+[       OK ] MSVBasicTest.VerifyAllSameResidue (0 ms)
+[----------] 1 test from MSVBasicTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVBasicTest.VerifyAllSameResidue" end time: Feb 09 19:27 PST
+"MSVBasicTest.VerifyAllSameResidue" time elapsed: 00:00:00
+----------------------------------------------------------
+
+14/27 Testing: MSVEdgeCaseTest.MinimalCase
+14/27 Test: MSVEdgeCaseTest.MinimalCase
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.MinimalCase" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.MinimalCase" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.MinimalCase
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.MinimalCase
+[       OK ] MSVEdgeCaseTest.MinimalCase (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.MinimalCase" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.MinimalCase" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/27 Testing: MSVEdgeCaseTest.EmptySequence
+15/27 Test: MSVEdgeCaseTest.EmptySequence
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.EmptySequence" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.EmptySequence" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.EmptySequence
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.EmptySequence
+[       OK ] MSVEdgeCaseTest.EmptySequence (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.EmptySequence" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.EmptySequence" time elapsed: 00:00:00
+----------------------------------------------------------
+
+16/27 Testing: MSVEdgeCaseTest.EmptyModel
+16/27 Test: MSVEdgeCaseTest.EmptyModel
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.EmptyModel" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.EmptyModel" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.EmptyModel
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.EmptyModel
+[       OK ] MSVEdgeCaseTest.EmptyModel (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.EmptyModel" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.EmptyModel" time elapsed: 00:00:00
+----------------------------------------------------------
+
+17/27 Testing: MSVEdgeCaseTest.LargeNegativeScores
+17/27 Test: MSVEdgeCaseTest.LargeNegativeScores
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.LargeNegativeScores" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.LargeNegativeScores" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.LargeNegativeScores
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.LargeNegativeScores
+/Users/mamelara/JGI/NESAP/msv-filter/tests/test_msv_edge_cases.cpp:304: Failure
+The difference between TestCase::EXPECTED_SCORE and actual_score is 200, which exceeds 0.001f, where
+TestCase::EXPECTED_SCORE evaluates to 5,
+actual_score evaluates to -195, and
+0.001f evaluates to 0.0010000000474974513.
+MSV score mismatch for edge case: large_negative_model
+
+[  FAILED  ] MSVEdgeCaseTest.LargeNegativeScores (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] MSVEdgeCaseTest.LargeNegativeScores
+
+ 1 FAILED TEST
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"MSVEdgeCaseTest.LargeNegativeScores" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.LargeNegativeScores" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/27 Testing: MSVEdgeCaseTest.LargePositiveScores
+18/27 Test: MSVEdgeCaseTest.LargePositiveScores
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.LargePositiveScores" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.LargePositiveScores" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.LargePositiveScores
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.LargePositiveScores
+[       OK ] MSVEdgeCaseTest.LargePositiveScores (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.LargePositiveScores" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.LargePositiveScores" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/27 Testing: MSVEdgeCaseTest.AllNegativeScores
+19/27 Test: MSVEdgeCaseTest.AllNegativeScores
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.AllNegativeScores" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.AllNegativeScores" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.AllNegativeScores
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.AllNegativeScores
+/Users/mamelara/JGI/NESAP/msv-filter/tests/test_msv_edge_cases.cpp:304: Failure
+The difference between TestCase::EXPECTED_SCORE and actual_score is 8, which exceeds 0.001f, where
+TestCase::EXPECTED_SCORE evaluates to -2,
+actual_score evaluates to -10, and
+0.001f evaluates to 0.0010000000474974513.
+MSV score mismatch for edge case: constant_score_model
+
+[  FAILED  ] MSVEdgeCaseTest.AllNegativeScores (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] MSVEdgeCaseTest.AllNegativeScores
+
+ 1 FAILED TEST
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"MSVEdgeCaseTest.AllNegativeScores" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.AllNegativeScores" time elapsed: 00:00:00
+----------------------------------------------------------
+
+20/27 Testing: MSVEdgeCaseTest.ZeroScores
+20/27 Test: MSVEdgeCaseTest.ZeroScores
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.ZeroScores" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.ZeroScores" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.ZeroScores
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.ZeroScores
+[       OK ] MSVEdgeCaseTest.ZeroScores (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.ZeroScores" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.ZeroScores" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/27 Testing: MSVEdgeCaseTest.LongModelShortSequence
+21/27 Test: MSVEdgeCaseTest.LongModelShortSequence
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.LongModelShortSequence" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.LongModelShortSequence" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.LongModelShortSequence
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.LongModelShortSequence
+[       OK ] MSVEdgeCaseTest.LongModelShortSequence (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.LongModelShortSequence" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.LongModelShortSequence" time elapsed: 00:00:00
+----------------------------------------------------------
+
+22/27 Testing: MSVEdgeCaseTest.ShortModelLongSequence
+22/27 Test: MSVEdgeCaseTest.ShortModelLongSequence
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.ShortModelLongSequence" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.ShortModelLongSequence" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.ShortModelLongSequence
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.ShortModelLongSequence
+[       OK ] MSVEdgeCaseTest.ShortModelLongSequence (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.ShortModelLongSequence" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.ShortModelLongSequence" time elapsed: 00:00:00
+----------------------------------------------------------
+
+23/27 Testing: MSVEdgeCaseTest.DegenerateResidues
+23/27 Test: MSVEdgeCaseTest.DegenerateResidues
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.DegenerateResidues" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.DegenerateResidues" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.DegenerateResidues
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.DegenerateResidues
+[       OK ] MSVEdgeCaseTest.DegenerateResidues (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.DegenerateResidues" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.DegenerateResidues" time elapsed: 00:00:00
+----------------------------------------------------------
+
+24/27 Testing: MSVEdgeCaseTest.VerifySentinelsUnchanged
+24/27 Test: MSVEdgeCaseTest.VerifySentinelsUnchanged
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.VerifySentinelsUnchanged" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.VerifySentinelsUnchanged" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.VerifySentinelsUnchanged
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.VerifySentinelsUnchanged
+[       OK ] MSVEdgeCaseTest.VerifySentinelsUnchanged (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.VerifySentinelsUnchanged" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.VerifySentinelsUnchanged" time elapsed: 00:00:00
+----------------------------------------------------------
+
+25/27 Testing: MSVEdgeCaseTest.SingleResidueModelMultiplePositions
+25/27 Test: MSVEdgeCaseTest.SingleResidueModelMultiplePositions
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.SingleResidueModelMultiplePositions" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.SingleResidueModelMultiplePositions" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.SingleResidueModelMultiplePositions
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.SingleResidueModelMultiplePositions
+[       OK ] MSVEdgeCaseTest.SingleResidueModelMultiplePositions (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.SingleResidueModelMultiplePositions" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.SingleResidueModelMultiplePositions" time elapsed: 00:00:00
+----------------------------------------------------------
+
+26/27 Testing: MSVEdgeCaseTest.ModelAndSequenceBothSingle
+26/27 Test: MSVEdgeCaseTest.ModelAndSequenceBothSingle
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.ModelAndSequenceBothSingle" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.ModelAndSequenceBothSingle" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.ModelAndSequenceBothSingle
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.ModelAndSequenceBothSingle
+[       OK ] MSVEdgeCaseTest.ModelAndSequenceBothSingle (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.ModelAndSequenceBothSingle" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.ModelAndSequenceBothSingle" time elapsed: 00:00:00
+----------------------------------------------------------
+
+27/27 Testing: MSVEdgeCaseTest.DPMatrixDimensions
+27/27 Test: MSVEdgeCaseTest.DPMatrixDimensions
+Command: "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests" "--gtest_filter=MSVEdgeCaseTest.DPMatrixDimensions" "--gtest_also_run_disabled_tests"
+Directory: /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests
+"MSVEdgeCaseTest.DPMatrixDimensions" start time: Feb 09 19:27 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MSVEdgeCaseTest.DPMatrixDimensions
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MSVEdgeCaseTest
+[ RUN      ] MSVEdgeCaseTest.DPMatrixDimensions
+[       OK ] MSVEdgeCaseTest.DPMatrixDimensions (0 ms)
+[----------] 1 test from MSVEdgeCaseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MSVEdgeCaseTest.DPMatrixDimensions" end time: Feb 09 19:27 PST
+"MSVEdgeCaseTest.DPMatrixDimensions" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Feb 09 19:27 PST

@@ -1,0 +1,5 @@
+if(EXISTS "/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests[1]_tests.cmake")
+  include("/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/msv_tests[1]_tests.cmake")
+else()
+  add_test(msv_tests_NOT_BUILT msv_tests_NOT_BUILT)
+endif()

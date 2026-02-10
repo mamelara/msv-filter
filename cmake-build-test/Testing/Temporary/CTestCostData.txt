@@ -1,0 +1,31 @@
+MSVBasicTest.ConstantAllOnes 2 0.00319177
+MSVBasicTest.ConstantAllTwos 2 0.00141244
+MSVBasicTest.SinglePositionModel 2 0.0014365
+MSVBasicTest.SingleResidueSequence 2 0.00145335
+MSVBasicTest.AlternatingPattern 2 0.00139
+MSVBasicTest.AllSameResidue 0 0
+MSVBasicTest.AllDifferentResidues 2 0.00181479
+MSVBasicTest.ShorterSequence 2 0.00130402
+MSVBasicTest.LongerSequence 2 0.0012309
+MSVBasicTest.MixedScores 2 0.00144771
+MSVBasicTest.VerifyTestVectors 2 0.0013885
+MSVBasicTest.VerifyAlternatingPattern 2 0.00116242
+MSVBasicTest.VerifyAllSameResidue 2 0.0011836
+MSVEdgeCaseTest.MinimalCase 2 0.00127102
+MSVEdgeCaseTest.EmptySequence 2 0.00147008
+MSVEdgeCaseTest.EmptyModel 2 0.00115062
+MSVEdgeCaseTest.LargeNegativeScores 0 0
+MSVEdgeCaseTest.LargePositiveScores 2 0.00120913
+MSVEdgeCaseTest.AllNegativeScores 0 0
+MSVEdgeCaseTest.ZeroScores 2 0.0012275
+MSVEdgeCaseTest.LongModelShortSequence 2 0.00120737
+MSVEdgeCaseTest.ShortModelLongSequence 2 0.00116996
+MSVEdgeCaseTest.DegenerateResidues 2 0.00113654
+MSVEdgeCaseTest.VerifySentinelsUnchanged 2 0.00119519
+MSVEdgeCaseTest.SingleResidueModelMultiplePositions 2 0.00114919
+MSVEdgeCaseTest.ModelAndSequenceBothSingle 2 0.00105435
+MSVEdgeCaseTest.DPMatrixDimensions 2 0.00102548
+---
+MSVBasicTest.AllSameResidue
+MSVEdgeCaseTest.LargeNegativeScores
+MSVEdgeCaseTest.AllNegativeScores

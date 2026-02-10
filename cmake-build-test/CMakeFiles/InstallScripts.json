@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/cmake_install.cmake",
+		"/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/tests/cmake_install.cmake",
+		"/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-build/cmake_install.cmake",
+		"/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-build/googlemock/cmake_install.cmake",
+		"/Users/mamelara/JGI/NESAP/msv-filter/cmake-build-test/_deps/googletest-build/googletest/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

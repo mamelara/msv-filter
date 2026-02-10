@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/msv_tests.dir/test_msv_basic.cpp.o CMakeFiles/msv_tests.dir/test_msv_edge_cases.cpp.o CMakeFiles/msv_tests.dir/stub_msv.cpp.o CMakeFiles/msv_tests.dir/__/src/aa_alphabet.cpp.o -o msv_tests  ../lib/libgtest.a ../lib/libgtest_main.a
