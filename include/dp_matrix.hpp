@@ -62,30 +62,30 @@ public:
     // --- Accessor Methods (replace HMMER macros) ---
     
     // MMX(i,k) = dp[(i)][(k) * p7G_NSCELLS + p7G_M]
-    inline float& match(int i, int k) {
+    float& match(int i, int k) {
         return dp[i][(k * p7G_NSCELLS) + p7G_M];
     }
     
-    inline float match(int i, int k) const {
+    float match(int i, int k) const {
         return dp[i][(k * p7G_NSCELLS) + p7G_M];
     }
     
     // IMX(i,k) = dp[(i)][(k) * p7G_NSCELLS + p7G_I]
-    inline float& insert(int i, int k) {
+    float& insert(int i, int k) {
         return dp[i][(k * p7G_NSCELLS) + p7G_I];
     }
     
     // DMX(i,k) = dp[(i)][(k) * p7G_NSCELLS + p7G_D]
-    inline float& delete_state(int i, int k) {
+    float& delete_state(int i, int k) {
         return dp[i][(k * p7G_NSCELLS) + p7G_D];
     }
     
     // XMX(i,s) = xmx[(i) * p7G_NXCELLS + (s)]
-    inline float& special(int i, int s) {
+    float& special(int i, int s) {
         return xmx[(i * p7G_NXCELLS) + s];
     }
     
-    inline float special(int i, int s) const {
+    float special(int i, int s) const {
         return xmx[(i * p7G_NXCELLS) + s];
     }
 };
