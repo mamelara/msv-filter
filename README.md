@@ -40,15 +40,58 @@ cmake ..
 cmake --build .
 ```
 
+### Optional: Build with HMMER/Easel bridge
+
+If you want to parse real HMM/FASTA inputs with upstream HMMER/Easel and then
+materialize C++ objects (`HMMProfile`, `DPMatrix`, digital sequence buffers),
+build with bridge mode enabled.
+
+1. Build and install HMMER (which also installs Easel headers/libs):
+```bash
+cd hmmer
+./configure --prefix "$HOME/.local/hmmer"
+make -j
+make install
+```
+
+2. Configure this project with bridge support:
+```bash
+cmake -S . -B build-bridge \
+  -DMSV_ENABLE_HMMER_BRIDGE=ON \
+  -DMSV_HMMER_PREFIX="$HOME/.local/hmmer"
+```
+
+3. Build the bridge smoke executable:
+```bash
+cmake --build build-bridge --target hmmer_parse_upstream
+```
+
+4. Run parser + adapter smoke test:
+```bash
+./build-bridge/hmmer_parse_upstream databases/panther.100.hmm inputs/Arabidopsis_thaliana.100.pep.fa
+```
+
 This will build:
 - `msv_filter` - The main executable demonstrating mock inputs
 - `msv_tests` - The unit test executable (uses Google Test)
+
+When bridge mode is enabled, this also builds:
+- `msv_hmmer_bridge` - C bridge + C++ adapter layer
+- `hmmer_parse_upstream` - example executable that reads upstream HMM/FASTA and instantiates C++ objects
 
 ### Build Output
 
 After building, you'll find:
 - Main executable: `cmake-build-test/msv_filter`
 - Test executable: `cmake-build-test/tests/msv_tests`
+
+If you want a faster configure when you only care about compiling the main
+binary, disable tests:
+
+```bash
+cmake -S . -B cmake-build-main -DMSV_ENABLE_TESTS=OFF
+cmake --build cmake-build-main --target msv_filter
+```
 
 ## Running the Application
 
@@ -74,6 +117,13 @@ cd cmake-build-test
 ctest --output-on-failure
 ```
 
+Run a single test suite:
+
+```bash
+cd cmake-build-test
+ctest -R MSVBasicTest --output-on-failure
+```
+
 ### Running Tests Directly
 
 ```bash
@@ -96,7 +146,9 @@ Test project /path/to/msv-filter/cmake-build-test
 89% tests passed, 3 tests failed out of 27
 ```
 
-Note: Some tests may fail if the MSV algorithm implementation is not yet complete (currently using stub implementation).
+Note: the tests are wired to `src/msv_filter.cpp`. If your implementation is
+in progress, score mismatches are expected; build/signature/link errors should
+not occur.
 
 ## CLion Setup
 
@@ -111,6 +163,13 @@ Note: Some tests may fail if the MSV algorithm implementation is not yet complet
 
 CLion will automatically detect the `CMakeLists.txt` and configure the project. The default build directory will be `cmake-build-debug` or `cmake-build-release`.
 
+Recommended CLion CMake profiles:
+
+1. **Default dev/testing profile**
+   - CMake options: `-DMSV_ENABLE_TESTS=ON -DMSV_ENABLE_HMMER_BRIDGE=OFF`
+2. **Bridge profile** (for upstream HMMER/Easel parsing)
+   - CMake options: `-DMSV_ENABLE_TESTS=ON -DMSV_ENABLE_HMMER_BRIDGE=ON -DMSV_HMMER_PREFIX=$HOME/.local/hmmer`
+
 ### Running in CLion
 
 **Main Application:**
@@ -121,6 +180,12 @@ CLion will automatically detect the `CMakeLists.txt` and configure the project. 
 1. Select `msv_tests` from the run configuration dropdown
 2. Click **Run** to execute all tests
 3. Or use **Tools → CMake → Run Tests** to run via CTest
+
+**Bridge smoke run:**
+1. Switch to the CLion profile where `MSV_ENABLE_HMMER_BRIDGE=ON`
+2. Select `hmmer_parse_upstream` from the run configuration dropdown
+3. Add program arguments, for example:
+   - `databases/panther.100.hmm inputs/Arabidopsis_thaliana.100.pep.fa`
 
 ### Debugging
 
@@ -207,18 +272,24 @@ msv-filter/
 ├── README.md               # This file
 ├── src/                    # Source files
 │   ├── main.cpp           # Main executable
+│   ├── msv_filter.cpp     # MSV filter implementation
+│   ├── hmmer_c_bridge.c   # C bridge to upstream HMMER/Easel
+│   ├── msv_bridge_adapter.cpp # Bridge -> C++ object adapters
+│   ├── hmmer_parse_upstream.cpp # Parser/adapter smoke executable
 │   └── aa_alphabet.cpp    # Amino acid alphabet implementation
 ├── include/               # Header files
 │   ├── hmmer_types.hpp    # HMMER-compatible type definitions
 │   ├── aa_alphabet.hpp    # Alphabet definitions
 │   ├── profile.hpp        # Profile structures
 │   ├── dp_matrix.hpp      # DP matrix implementation
-│   └── mock_data.hpp      # Mock data generation
+│   ├── mock_data.hpp      # Mock data generation
+│   ├── msv_filter.hpp     # MSV filter API
+│   ├── hmmer_c_bridge.h   # C bridge API (opaque handles)
+│   └── msv_bridge_adapter.hpp # C++ adapter API
 └── tests/                 # Unit tests
     ├── CMakeLists.txt     # Test CMake configuration
     ├── test_msv_basic.cpp # Basic functionality tests
-    ├── test_msv_edge_cases.cpp # Edge case tests
-    └── stub_msv.cpp       # Stub MSV implementation
+    └── test_msv_edge_cases.cpp # Edge case tests
 ```
 
 ## HMMER Integration

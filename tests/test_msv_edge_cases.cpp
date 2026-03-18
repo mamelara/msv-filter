@@ -11,12 +11,7 @@
 #include "dp_matrix.hpp"
 #include "mock_data.hpp"
 #include "aa_alphabet.hpp"
-
-// ============================================================================
-// Forward Declaration - User will implement this function
-// ============================================================================
-float compute_msv(const DigitalResidue* digital_sequence, int sequence_length,
-                  const HMMProfile& profile, DPMatrix& dp_matrix, float expected_hit_count);
+#include "msv_filter.hpp"
 
 namespace msv_test {
 
@@ -293,13 +288,17 @@ protected:
         HMMProfile profile = TestCase::get_profile(*alphabet);
         DPMatrix dp_matrix = TestCase::get_dp_matrix();
         
-        float actual_score = compute_msv(
+        float actual_score = 0.0f;
+        const int status = msv_filter(
             digital_sequence.data(),
             TestCase::SEQUENCE_LENGTH,
             profile,
             dp_matrix,
-            1.0f
+            1.0f,
+            &actual_score
         );
+
+        ASSERT_EQ(0, status);
         
         ASSERT_NEAR(TestCase::EXPECTED_SCORE, actual_score, 0.001f)
             << "MSV score mismatch for edge case: " << profile.name;
@@ -388,8 +387,10 @@ TEST_F(MSVEdgeCaseTest, VerifySentinelsUnchanged) {
     HMMProfile profile = MinimalTestCase::get_profile(*alphabet);
     DPMatrix dp_matrix = MinimalTestCase::get_dp_matrix();
     
-    // Call compute_msv
-    compute_msv(digital_sequence.data(), 1, profile, dp_matrix, 1.0f);
+    // Call msv_filter
+    float score = 0.0f;
+    const int status = msv_filter(digital_sequence.data(), 1, profile, dp_matrix, 1.0f, &score);
+    ASSERT_EQ(0, status);
     
     // Verify sentinels are unchanged
     EXPECT_EQ(sentinel_before_0, digital_sequence[0]);
@@ -422,7 +423,9 @@ TEST_F(MSVEdgeCaseTest, SingleResidueModelMultiplePositions) {
     
     DPMatrix dp_matrix(1, 10);
     
-    float score = compute_msv(seq.data(), 10, profile, dp_matrix, 1.0f);
+    float score = 0.0f;
+    const int status = msv_filter(seq.data(), 10, profile, dp_matrix, 1.0f, &score);
+    ASSERT_EQ(0, status);
     
     // Can only align 1 position, score = 5.0
     EXPECT_NEAR(5.0f, score, 0.001f);
@@ -440,7 +443,9 @@ TEST_F(MSVEdgeCaseTest, ModelAndSequenceBothSingle) {
     
     DPMatrix dp_matrix(1, 1);
     
-    float score = compute_msv(seq.data(), 1, profile, dp_matrix, 1.0f);
+    float score = 0.0f;
+    const int status = msv_filter(seq.data(), 1, profile, dp_matrix, 1.0f, &score);
+    ASSERT_EQ(0, status);
     
     EXPECT_NEAR(7.5f, score, 0.001f);
 }

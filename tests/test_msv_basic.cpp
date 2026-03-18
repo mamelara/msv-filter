@@ -11,26 +11,7 @@
 #include "dp_matrix.hpp"
 #include "mock_data.hpp"
 #include "aa_alphabet.hpp"
-
-// ============================================================================
-// Forward Declaration - User will implement this function
-// ============================================================================
-// The MSV (Multiple Segment Viterbi) filter computes the maximum scoring
-// segment alignment between a sequence and an HMM profile.
-// 
-// Parameters:
-//   digital_sequence: 1-indexed digital sequence with sentinels at 0 and L+1
-//   sequence_length:  Length of the actual sequence (sentinels excluded)
-//   profile:          HMM profile with match scores
-//   dp_matrix:        Dynamic programming matrix for storing intermediate values
-//   expected_hit_count: Expected number of hits (for normalization)
-//
-// Returns:
-//   The MSV score (maximum scoring segment score)
-//
-// Note: This is a placeholder - the user will implement the actual algorithm
-float compute_msv(const DigitalResidue* digital_sequence, int sequence_length,
-                  const HMMProfile& profile, DPMatrix& dp_matrix, float expected_hit_count);
+#include "msv_filter.hpp"
 
 // ============================================================================
 // Test Fixture for MSV Basic Tests
@@ -52,14 +33,17 @@ protected:
         HMMProfile profile = TestCase::get_profile(*alphabet);
         DPMatrix dp_matrix = TestCase::get_dp_matrix();
         
-        // Call the MSV function (placeholder)
-        float actual_score = compute_msv(
-            digital_sequence.data(), 
+        float actual_score = 0.0f;
+        const int status = msv_filter(
+            digital_sequence.data(),
             TestCase::SEQUENCE_LENGTH,
-            profile, 
-            dp_matrix, 
-            1.0f  // expected_hit_count
+            profile,
+            dp_matrix,
+            1.0f,
+            &actual_score
         );
+
+        ASSERT_EQ(0, status);
         
         // Verify with tolerance for floating point
         ASSERT_NEAR(TestCase::EXPECTED_SCORE, actual_score, 0.001f)
@@ -214,7 +198,7 @@ TEST_F(MSVBasicTest, MixedScores) {
 // ============================================================================
 // Direct Value Verification Tests
 // ============================================================================
-// These tests verify specific expected values without relying on compute_msv
+// These tests verify specific expected values without relying on msv_filter internals
 // Useful for debugging and validating test vector correctness
 
 TEST_F(MSVBasicTest, VerifyTestVectors) {

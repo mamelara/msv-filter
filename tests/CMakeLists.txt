@@ -20,7 +20,6 @@ FetchContent_MakeAvailable(googletest)
 add_executable(msv_tests
     test_msv_basic.cpp
     test_msv_edge_cases.cpp
-    stub_msv.cpp  # Stub implementation - user will replace with actual algorithm
 )
 
 # Link against Google Test
@@ -37,6 +36,7 @@ target_include_directories(msv_tests PRIVATE
 # Add additional source files from main project that tests depend on
 target_sources(msv_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/src/aa_alphabet.cpp
+    ${CMAKE_SOURCE_DIR}/src/msv_filter.cpp
 )
 
 # Discover and register tests with CTest
