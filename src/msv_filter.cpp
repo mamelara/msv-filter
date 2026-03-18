@@ -15,14 +15,17 @@ int msv_filter(const DigitalResidue* digital_sequence,
 
   float loop_transition_score = logf(static_cast<float>(sequence_length) / static_cast<float>(sequence_length + 3));
   float move_transition_score = logf( 3.0f / static_cast<float>(sequence_length + 3));
-  float begin_transition_score = logf( 2.0f / static_cast<float>(profile.model_length * profile.model_length + 1));
+  float begin_transition_score = logf( 2.0f / static_cast<float>(profile.model_length * (profile.model_length + 1)));
   float t_state_to_e_state = logf((expected_hit_count - 1.0f) / expected_hit_count);
   float e_state_to_c_state = logf(1.0f / expected_hit_count);
 
   dp_matrix.special(0, p7G_N) = 0.0f;
   dp_matrix.special(0, p7G_B) = move_transition_score;
-  dp_matrix.special(0, p7G_E) = dp_matrix.special(0, p7G_C) = dp_matrix.special(0, p7G_J) = -eslINFINITY;
-  for (int i = 0; i <= profile.model_length; i++) dp_matrix.special(0, i) = -eslINFINITY;
+  dp_matrix.special(0, p7G_E) = -eslINFINITY;
+  dp_matrix.special(0, p7G_C) = -eslINFINITY;
+  dp_matrix.special(0, p7G_J) = -eslINFINITY;
+
+  for (int i = 0; i <= profile.model_length; i++) dp_matrix.match(0, i) = -eslINFINITY;
 
   for (int i = 1; i <= sequence_length; i++) {
     dp_matrix.match(i, 0) = -eslINFINITY;
