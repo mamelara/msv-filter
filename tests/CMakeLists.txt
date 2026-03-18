@@ -22,11 +22,23 @@ add_executable(msv_tests
     test_msv_edge_cases.cpp
 )
 
+if(TARGET msv_hmmer_bridge)
+    target_sources(msv_tests PRIVATE
+        test_msv_hmmer_integration.cpp
+    )
+endif()
+
 # Link against Google Test
 target_link_libraries(msv_tests
     GTest::gtest
     GTest::gtest_main
 )
+
+if(TARGET msv_hmmer_bridge)
+    target_link_libraries(msv_tests
+        msv_hmmer_bridge
+    )
+endif()
 
 # Include directories
 target_include_directories(msv_tests PRIVATE

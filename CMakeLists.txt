@@ -25,33 +25,42 @@ target_include_directories(msv_filter PRIVATE include)
 option(MSV_ENABLE_HMMER_BRIDGE "Enable HMMER/Easel bridge integration" OFF)
 
 if(MSV_ENABLE_HMMER_BRIDGE)
-    set(MSV_HMMER_PREFIX "" CACHE PATH "Install prefix for HMMER/Easel (must contain include/ and lib/)")
+    set(MSV_HMMER_PREFIX "" CACHE PATH "HMMER root: install prefix (include/lib) or source tree root (src/easel)")
 
     find_path(MSV_HMMER_INCLUDE_DIR
         NAMES hmmer.h
         HINTS
             ${MSV_HMMER_PREFIX}
-        PATH_SUFFIXES include
+        PATH_SUFFIXES include src
+    )
+
+    find_path(MSV_EASEL_INCLUDE_DIR
+        NAMES easel.h
+        HINTS
+            ${MSV_HMMER_PREFIX}
+        PATH_SUFFIXES include easel
     )
 
     find_library(MSV_HMMER_LIBRARY
-        NAMES hmmer
+        NAMES hmmer libhmmer.a
         HINTS
             ${MSV_HMMER_PREFIX}
-        PATH_SUFFIXES lib
+        PATH_SUFFIXES lib src
     )
 
     find_library(MSV_EASEL_LIBRARY
-        NAMES easel
+        NAMES easel libeasel.a
         HINTS
             ${MSV_HMMER_PREFIX}
-        PATH_SUFFIXES lib
+        PATH_SUFFIXES lib easel
     )
 
-    if(NOT MSV_HMMER_INCLUDE_DIR OR NOT MSV_HMMER_LIBRARY OR NOT MSV_EASEL_LIBRARY)
+    if(NOT MSV_HMMER_INCLUDE_DIR OR NOT MSV_EASEL_INCLUDE_DIR OR NOT MSV_HMMER_LIBRARY OR NOT MSV_EASEL_LIBRARY)
         message(FATAL_ERROR
             "MSV_ENABLE_HMMER_BRIDGE is ON, but HMMER/Easel were not found. "
-            "Set MSV_HMMER_PREFIX to a valid install prefix (for example from ./configure --prefix=...).")
+            "Set MSV_HMMER_PREFIX to either: "
+            "(a) an install prefix from ./configure --prefix=..., or "
+            "(b) a built source tree root containing src/libhmmer.a and easel/libeasel.a.")
     endif()
 
     add_library(msv_hmmer_bridge STATIC
@@ -64,6 +73,7 @@ if(MSV_ENABLE_HMMER_BRIDGE)
             include
         PRIVATE
             ${MSV_HMMER_INCLUDE_DIR}
+            ${MSV_EASEL_INCLUDE_DIR}
     )
 
     target_link_libraries(msv_hmmer_bridge

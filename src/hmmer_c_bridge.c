@@ -351,7 +351,7 @@ float msv_profilectx_match_score(const MsvProfileCtx* profile_ctx, int model_pos
   if (model_position > profile_ctx->gm->M || residue_code >= profile_ctx->gm->abc->Kp) {
     return -eslINFINITY;
   }
-  return P7P_MSC(profile_ctx->gm, model_position, residue_code);
+  return profile_ctx->gm->rsc[residue_code][model_position];
 }
 
 int msv_profilectx_score_gmsv(MsvProfileCtx* profile_ctx,

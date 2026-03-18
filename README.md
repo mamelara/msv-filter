@@ -109,6 +109,48 @@ This demonstrates the creation of mock inputs for the `p7_GMSV` function, includ
 
 ## Running Tests
 
+### Developer Note: Full Suite vs Integration Only
+
+Use these command sets depending on your goal.
+
+Run the full suite (unit tests + integration parity test):
+
+```bash
+cmake -S . -B build-all \
+  -DMSV_ENABLE_TESTS=ON \
+  -DMSV_ENABLE_HMMER_BRIDGE=ON \
+  -DMSV_HMMER_PREFIX="$HOME/.local/hmmer"
+cmake --build build-all --target msv_tests
+ctest --test-dir build-all --output-on-failure
+```
+
+Run only the integration parity test for quick iteration:
+
+```bash
+cmake -S . -B build-itest \
+  -DMSV_ENABLE_TESTS=ON \
+  -DMSV_ENABLE_HMMER_BRIDGE=ON \
+  -DMSV_HMMER_PREFIX="$HOME/.local/hmmer"
+cmake --build build-itest --target msv_tests
+ctest --test-dir build-itest -R MSVHmmerIntegrationTest --output-on-failure
+```
+
+Quick iteration defaults for integration test are intentionally bounded:
+- up to 3 HMMs
+- up to 25 sequences per HMM
+
+Override integration test bounds and inputs with environment variables:
+
+```bash
+MSV_ITEST_HMM_PATH=databases/panther.100.hmm \
+MSV_ITEST_FASTA_PATH=inputs/Arabidopsis_thaliana.100.pep.fa \
+MSV_ITEST_MAX_HMMS=3 \
+MSV_ITEST_MAX_SEQS=25 \
+MSV_ITEST_NU=2.0 \
+MSV_ITEST_TOL=1e-4 \
+ctest --test-dir build-itest -R MSVHmmerIntegrationTest --output-on-failure
+```
+
 ### Using CTest (Recommended)
 
 From the build directory:
@@ -180,6 +222,13 @@ Recommended CLion CMake profiles:
 1. Select `msv_tests` from the run configuration dropdown
 2. Click **Run** to execute all tests
 3. Or use **Tools → CMake → Run Tests** to run via CTest
+
+**Integration-only in CLion (fast feedback):**
+1. Open **Run | Edit Configurations...**
+2. Add a new **Google Test** configuration
+3. Target: `msv_tests`
+4. Test filter: `MSVHmmerIntegrationTest.*`
+5. (Optional) Add environment variables such as `MSV_ITEST_MAX_HMMS=3;MSV_ITEST_MAX_SEQS=25`
 
 **Bridge smoke run:**
 1. Switch to the CLion profile where `MSV_ENABLE_HMMER_BRIDGE=ON`
