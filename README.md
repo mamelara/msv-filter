@@ -46,19 +46,18 @@ If you want to parse real HMM/FASTA inputs with upstream HMMER/Easel and then
 materialize C++ objects (`HMMProfile`, `DPMatrix`, digital sequence buffers),
 build with bridge mode enabled.
 
-1. Build and install HMMER (which also installs Easel headers/libs):
+1. Build HMMER in the local `hmmer/` source tree (no install needed):
 ```bash
 cd hmmer
-./configure --prefix "$HOME/.local/hmmer"
+./configure
 make -j
-make install
 ```
 
-2. Configure this project with bridge support:
+2. Configure this project with bridge support using the local source tree:
 ```bash
 cmake -S . -B build-bridge \
   -DMSV_ENABLE_HMMER_BRIDGE=ON \
-  -DMSV_HMMER_PREFIX="$HOME/.local/hmmer"
+  -DMSV_HMMER_PREFIX="/Users/mamelara/JGI/NESAP/msv-filter/hmmer"
 ```
 
 3. Build the bridge smoke executable:
@@ -69,6 +68,43 @@ cmake --build build-bridge --target hmmer_parse_upstream
 4. Run parser + adapter smoke test:
 ```bash
 ./build-bridge/hmmer_parse_upstream databases/panther.100.hmm inputs/Arabidopsis_thaliana.100.pep.fa
+```
+
+`MSV_HMMER_PREFIX` supports either of these layouts:
+- source tree root (`.../hmmer`) with `src/libhmmer.a` and `easel/libeasel.a`
+- install prefix (`.../prefix`) with `include/` and `lib/`
+
+If you prefer an install-prefix flow, use:
+```bash
+cd hmmer
+./configure --prefix "$HOME/.local/hmmer"
+make -j
+make install
+cmake -S . -B build-bridge \
+  -DMSV_ENABLE_HMMER_BRIDGE=ON \
+  -DMSV_HMMER_PREFIX="$HOME/.local/hmmer"
+```
+
+### HMMER debug build (for stepping into `generic_msv.c`)
+
+If you want to add debug statements or step inside `p7_GMSV` in
+`hmmer/src/generic_msv.c`, rebuild HMMER with debug symbols and low optimization:
+
+```bash
+cd hmmer
+make distclean
+autoconf
+CFLAGS='-O0 -g3 -fno-omit-frame-pointer' ./configure --enable-debugging
+make -j
+```
+
+For benchmark runs, switch back to an optimized HMMER build:
+
+```bash
+cd hmmer
+make distclean
+./configure
+make -j
 ```
 
 This will build:
@@ -119,7 +155,7 @@ Run the full suite (unit tests + integration parity test):
 cmake -S . -B build-all \
   -DMSV_ENABLE_TESTS=ON \
   -DMSV_ENABLE_HMMER_BRIDGE=ON \
-  -DMSV_HMMER_PREFIX="$HOME/.local/hmmer"
+  -DMSV_HMMER_PREFIX="/Users/mamelara/JGI/NESAP/msv-filter/hmmer"
 cmake --build build-all --target msv_tests
 ctest --test-dir build-all --output-on-failure
 ```
@@ -130,7 +166,7 @@ Run only the integration parity test for quick iteration:
 cmake -S . -B build-itest \
   -DMSV_ENABLE_TESTS=ON \
   -DMSV_ENABLE_HMMER_BRIDGE=ON \
-  -DMSV_HMMER_PREFIX="$HOME/.local/hmmer"
+  -DMSV_HMMER_PREFIX="/Users/mamelara/JGI/NESAP/msv-filter/hmmer"
 cmake --build build-itest --target msv_tests
 ctest --test-dir build-itest -R MSVHmmerIntegrationTest --output-on-failure
 ```
@@ -150,6 +186,10 @@ MSV_ITEST_NU=2.0 \
 MSV_ITEST_TOL=1e-4 \
 ctest --test-dir build-itest -R MSVHmmerIntegrationTest --output-on-failure
 ```
+
+If the integration test is skipped in CLion/CTest with "Unable to open HMM path",
+use absolute paths for `MSV_ITEST_HMM_PATH` and `MSV_ITEST_FASTA_PATH`, or set the
+working directory to the repo root.
 
 ### Using CTest (Recommended)
 
@@ -210,7 +250,9 @@ Recommended CLion CMake profiles:
 1. **Default dev/testing profile**
    - CMake options: `-DMSV_ENABLE_TESTS=ON -DMSV_ENABLE_HMMER_BRIDGE=OFF`
 2. **Bridge profile** (for upstream HMMER/Easel parsing)
-   - CMake options: `-DMSV_ENABLE_TESTS=ON -DMSV_ENABLE_HMMER_BRIDGE=ON -DMSV_HMMER_PREFIX=$HOME/.local/hmmer`
+   - CMake options: `-DMSV_ENABLE_TESTS=ON -DMSV_ENABLE_HMMER_BRIDGE=ON -DMSV_HMMER_PREFIX=/Users/mamelara/JGI/NESAP/msv-filter/hmmer`
+3. **Bridge debug profile** (for stepping into `generic_msv.c`)
+   - Build HMMER with the debug commands above, then use the same CMake options as Bridge profile
 
 ### Running in CLion
 
@@ -227,8 +269,11 @@ Recommended CLion CMake profiles:
 1. Open **Run | Edit Configurations...**
 2. Add a new **Google Test** configuration
 3. Target: `msv_tests`
-4. Test filter: `MSVHmmerIntegrationTest.*`
-5. (Optional) Add environment variables such as `MSV_ITEST_MAX_HMMS=3;MSV_ITEST_MAX_SEQS=25`
+4. Test kind: **Suite/Test**, Suite: `MSVHmmerIntegrationTest`, Test: `QuickParityAgainstHmmerGMSV`
+5. Set environment variables (recommended):
+   - `MSV_ITEST_HMM_PATH=/Users/mamelara/JGI/NESAP/msv-filter/databases/panther.100.hmm`
+   - `MSV_ITEST_FASTA_PATH=/Users/mamelara/JGI/NESAP/msv-filter/inputs/Arabidopsis_thaliana.100.pep.fa`
+   - `MSV_ITEST_MAX_HMMS=3;MSV_ITEST_MAX_SEQS=25`
 
 **Bridge smoke run:**
 1. Switch to the CLion profile where `MSV_ENABLE_HMMER_BRIDGE=ON`
