@@ -1,6 +1,5 @@
 #include "msv_bridge_adapter.hpp"
 
-#include <algorithm>
 #include <stdexcept>
 
 std::vector<DigitalResidue> make_digital_sequence_from_bridge(const MsvSeqRecord* seq_record) {

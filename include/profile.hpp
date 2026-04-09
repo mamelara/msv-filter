@@ -9,9 +9,6 @@
 
 #include <vector>
 #include <string>
-#include <limits>
-#include <cstring>
-#include <memory>
 #include "hmmer_types.hpp"
 #include "aa_alphabet.hpp"
 

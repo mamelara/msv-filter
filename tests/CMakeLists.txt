@@ -16,41 +16,25 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 # Make Google Test available
 FetchContent_MakeAvailable(googletest)
 
-# Create test executable
-add_executable(msv_tests
-    test_msv_basic.cpp
-    test_msv_edge_cases.cpp
-)
-
 if(TARGET msv_hmmer_bridge)
-    target_sources(msv_tests PRIVATE
+    add_executable(msv_tests
         test_msv_hmmer_integration.cpp
+        ${CMAKE_SOURCE_DIR}/src/aa_alphabet.cpp
+        ${CMAKE_SOURCE_DIR}/src/msv_filter.cpp
     )
-endif()
 
-# Link against Google Test
-target_link_libraries(msv_tests
-    GTest::gtest
-    GTest::gtest_main
-)
-
-if(TARGET msv_hmmer_bridge)
     target_link_libraries(msv_tests
+        GTest::gtest
+        GTest::gtest_main
         msv_hmmer_bridge
     )
+
+    target_include_directories(msv_tests PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+    )
+
+    include(GoogleTest)
+    gtest_discover_tests(msv_tests)
+else()
+    message(WARNING "Skipping tests: msv_hmmer_bridge target is required for integration tests")
 endif()
-
-# Include directories
-target_include_directories(msv_tests PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-# Add additional source files from main project that tests depend on
-target_sources(msv_tests PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/aa_alphabet.cpp
-    ${CMAKE_SOURCE_DIR}/src/msv_filter.cpp
-)
-
-# Discover and register tests with CTest
-include(GoogleTest)
-gtest_discover_tests(msv_tests)

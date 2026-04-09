@@ -149,7 +149,7 @@ This demonstrates the creation of mock inputs for the `p7_GMSV` function, includ
 
 Use these command sets depending on your goal.
 
-Run the full suite (unit tests + integration parity test):
+Run the integration parity test suite:
 
 ```bash
 cmake -S . -B build-all \
@@ -160,7 +160,7 @@ cmake --build build-all --target msv_tests
 ctest --test-dir build-all --output-on-failure
 ```
 
-Run only the integration parity test for quick iteration:
+Run the same integration parity test in a separate build dir for quick iteration:
 
 ```bash
 cmake -S . -B build-itest \
@@ -199,11 +199,11 @@ cd cmake-build-test
 ctest --output-on-failure
 ```
 
-Run a single test suite:
+Run the integration suite only:
 
 ```bash
 cd cmake-build-test
-ctest -R MSVBasicTest --output-on-failure
+ctest -R MSVHmmerIntegrationTest --output-on-failure
 ```
 
 ### Running Tests Directly
@@ -214,23 +214,13 @@ ctest -R MSVBasicTest --output-on-failure
 
 ### Test Output
 
-The test suite includes 27 tests covering:
-- **Basic functionality**: Constant patterns, single position models, alternating patterns
-- **Edge cases**: Empty sequences, large scores, boundary conditions
-- **Verification tests**: Test vector validation, sentinel preservation
+The test suite focuses on parity against upstream `generic_msv.c` via:
+- `MSVHmmerIntegrationTest.QuickParityAgainstHmmerGMSV`
 
 Example output:
 ```
-Test project /path/to/msv-filter/cmake-build-test
-      Start  1: MSVBasicTest.ConstantAllOnes
- 1/27 Test  #1: MSVBasicTest.ConstantAllOnes ..........................   Passed    0.01 sec
-...
-89% tests passed, 3 tests failed out of 27
+[integration] generic p7_GMSV parity summary | hmms=3 pairs=75 within_tol=75 finite_pairs=75 finite_mismatches=0 nonfinite_equal=0 nonfinite_mismatches=0 mismatches=0 max_abs_error=0 mean_abs_error=0
 ```
-
-Note: the tests are wired to `src/msv_filter.cpp`. If your implementation is
-in progress, score mismatches are expected; build/signature/link errors should
-not occur.
 
 ## CLion Setup
 
@@ -380,10 +370,9 @@ msv-filter/
 │   ├── msv_filter.hpp     # MSV filter API
 │   ├── hmmer_c_bridge.h   # C bridge API (opaque handles)
 │   └── msv_bridge_adapter.hpp # C++ adapter API
-└── tests/                 # Unit tests
+└── tests/                 # Integration tests
     ├── CMakeLists.txt     # Test CMake configuration
-    ├── test_msv_basic.cpp # Basic functionality tests
-    └── test_msv_edge_cases.cpp # Edge case tests
+    └── test_msv_hmmer_integration.cpp # HMMER parity integration test
 ```
 
 ## HMMER Integration

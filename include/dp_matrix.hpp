@@ -8,7 +8,6 @@
 #define MSV_FILTER_DP_MATRIX_HPP
 
 #include <vector>
-#include <limits>
 #include "hmmer_types.hpp"
 
 /*******************************************************************************

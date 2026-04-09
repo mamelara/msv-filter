@@ -7,8 +7,9 @@
 #ifndef MSV_FILTER_MOCK_DATA_HPP
 #define MSV_FILTER_MOCK_DATA_HPP
 
+#include <algorithm>
+#include <iostream>
 #include <vector>
-#include <string>
 #include <cmath>
 #include "hmmer_types.hpp"
 #include "aa_alphabet.hpp"
