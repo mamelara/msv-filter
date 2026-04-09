@@ -96,6 +96,22 @@ if(MSV_ENABLE_HMMER_BRIDGE)
         PRIVATE
             msv_hmmer_bridge
     )
+
+    add_executable(msv_filter_scan
+        src/msv_filter_scan.cpp
+        src/aa_alphabet.cpp
+        src/msv_filter.cpp
+    )
+
+    target_include_directories(msv_filter_scan
+        PRIVATE
+            include
+    )
+
+    target_link_libraries(msv_filter_scan
+        PRIVATE
+            msv_hmmer_bridge
+    )
 endif()
 
 option(MSV_ENABLE_TESTS "Enable unit tests" ON)
