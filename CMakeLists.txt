@@ -1,8 +1,25 @@
 cmake_minimum_required(VERSION 4.0)
+
+if(NOT DEFINED CMAKE_C_COMPILER)
+    find_program(MSV_GCC_15 NAMES gcc-15)
+    if(MSV_GCC_15)
+        set(CMAKE_C_COMPILER "${MSV_GCC_15}" CACHE FILEPATH "Preferred C compiler" FORCE)
+    endif()
+endif()
+
+if(NOT DEFINED CMAKE_CXX_COMPILER)
+    find_program(MSV_GXX_15 NAMES g++-15)
+    if(MSV_GXX_15)
+        set(CMAKE_CXX_COMPILER "${MSV_GXX_15}" CACHE FILEPATH "Preferred CXX compiler" FORCE)
+    endif()
+endif()
+
 project(msv_filter LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 99)
+
+find_package(OpenMP REQUIRED)
 
 # Enable clang-tidy if available
 find_program(CLANG_TIDY_EXE NAMES clang-tidy)
@@ -111,6 +128,7 @@ if(MSV_ENABLE_HMMER_BRIDGE)
     target_link_libraries(msv_filter_scan
         PRIVATE
             msv_hmmer_bridge
+            OpenMP::OpenMP_CXX
     )
 endif()
 

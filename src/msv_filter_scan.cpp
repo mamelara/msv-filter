@@ -1,10 +1,10 @@
-#include <algorithm>
-#include <cmath>
 #include <cstdlib>
 #include <iostream>
-#include <limits>
+#include <memory>
+#include <stdexcept>
 #include <string>
 #include <vector>
+#include <omp.h>
 
 #include "aa_alphabet.hpp"
 #include "hmmer_c_bridge.h"
@@ -18,20 +18,24 @@ struct RunConfig {
   std::string fasta_path;
   int max_hmms;
   int max_seqs;
+  int repeats;
+  bool print_matrix;
   float expected_hit_count;
 };
 
-struct RunStats {
-  int processed_hmms = 0;
-  int processed_pairs = 0;
-  int bridge_failures = 0;
-  int filter_failures = 0;
-  int finite_scores = 0;
-  int nonfinite_scores = 0;
-  float sum_scores = 0.0f;
-  float min_score = std::numeric_limits<float>::infinity();
-  float max_score = -std::numeric_limits<float>::infinity();
-  std::vector<std::string> failure_samples;
+using HmmRecordPtr = std::unique_ptr<MsvHmmRecord, decltype(&msv_hmmrecord_destroy)>;
+using ProfileCtxPtr = std::unique_ptr<MsvProfileCtx, decltype(&msv_profilectx_destroy)>;
+using HmmReaderPtr = std::unique_ptr<MsvHmmReader, decltype(&msv_hmm_reader_close)>;
+
+struct LoadedSequence {
+  std::string name;
+  int length = 0;
+  std::vector<DigitalResidue> residues;
+};
+
+struct LoadedHmms {
+  HmmReaderPtr reader{nullptr, &msv_hmm_reader_close};
+  std::vector<HmmRecordPtr> records;
 };
 
 const char* get_env_or_default(const char* name, const char* default_value) {
@@ -57,123 +61,122 @@ float get_env_float_or_default(const char* name, float default_value) {
   return std::strtof(value, nullptr);
 }
 
-std::string label_for_case(const char* hmm_name, const char* seq_name, int hmm_idx, int seq_idx) {
-  return "hmm#" + std::to_string(hmm_idx) + "(" + hmm_name + ")" +
-         " vs seq#" + std::to_string(seq_idx) + "(" + seq_name + ")";
-}
-
-void add_failure_sample(RunStats* stats, const std::string& message) {
-  if (stats->failure_samples.size() < 5) {
-    stats->failure_samples.push_back(message);
+LoadedHmms load_hmms(const RunConfig& config) {
+  MsvHmmReader* raw_reader = nullptr;
+  const int open_status = msv_hmm_reader_open(config.hmm_path.c_str(), &raw_reader);
+  if (open_status != MSV_BRIDGE_OK || raw_reader == nullptr) {
+    throw std::runtime_error("failed to open HMM path: " + config.hmm_path);
   }
-}
 
-RunStats run_msv_filter_scan(const RunConfig& config) {
-  RunStats stats;
-
-  MsvHmmReader* hmm_reader = nullptr;
-  const int open_status = msv_hmm_reader_open(config.hmm_path.c_str(), &hmm_reader);
-  if (open_status != MSV_BRIDGE_OK || hmm_reader == nullptr) {
-    ++stats.bridge_failures;
-    add_failure_sample(&stats, "failed to open HMM path: " + config.hmm_path);
-    return stats;
-  }
+  LoadedHmms hmms;
+  hmms.reader.reset(raw_reader);
+  hmms.records.reserve(static_cast<size_t>(config.max_hmms));
 
   for (int hmm_idx = 0; hmm_idx < config.max_hmms; ++hmm_idx) {
-    MsvHmmRecord* hmm_record = nullptr;
-    const int next_hmm_status = msv_hmm_reader_next(hmm_reader, &hmm_record);
-    if (next_hmm_status == MSV_BRIDGE_EOF) {
+    MsvHmmRecord* raw_hmm = nullptr;
+    const int next_status = msv_hmm_reader_next(hmms.reader.get(), &raw_hmm);
+    if (next_status == MSV_BRIDGE_EOF) {
       break;
     }
-    if (next_hmm_status != MSV_BRIDGE_OK || hmm_record == nullptr) {
-      ++stats.bridge_failures;
-      add_failure_sample(&stats, "failed reading HMM record: " + std::string(msv_hmm_reader_last_error(hmm_reader)));
-      continue;
+    if (next_status != MSV_BRIDGE_OK || raw_hmm == nullptr) {
+      throw std::runtime_error("failed reading HMM record: " + std::string(msv_hmm_reader_last_error(hmms.reader.get())));
     }
 
-    ++stats.processed_hmms;
-
-    MsvSeqReader* seq_reader = nullptr;
-    const int seq_open_status = msv_seq_reader_open(config.fasta_path.c_str(), hmm_record, &seq_reader);
-    if (seq_open_status != MSV_BRIDGE_OK || seq_reader == nullptr) {
-      ++stats.bridge_failures;
-      add_failure_sample(&stats, "failed opening FASTA path: " + config.fasta_path);
-      msv_hmmrecord_destroy(hmm_record);
-      continue;
-    }
-
-    for (int seq_idx = 0; seq_idx < config.max_seqs; ++seq_idx) {
-      MsvSeqRecord* seq_record = nullptr;
-      const int next_seq_status = msv_seq_reader_next(seq_reader, &seq_record);
-      if (next_seq_status == MSV_BRIDGE_EOF) {
-        break;
-      }
-      if (next_seq_status != MSV_BRIDGE_OK || seq_record == nullptr) {
-        ++stats.bridge_failures;
-        add_failure_sample(&stats, "failed reading sequence: " + std::string(msv_seq_reader_last_error(seq_reader)));
-        continue;
-      }
-
-      const std::string case_label = label_for_case(msv_hmmrecord_name(hmm_record),
-                                                    msv_seqrecord_name(seq_record),
-                                                    hmm_idx,
-                                                    seq_idx);
-
-      MsvProfileCtx* profile_ctx = nullptr;
-      const int seq_length = static_cast<int>(msv_seqrecord_length(seq_record));
-      const int ctx_status = msv_profilectx_create(hmm_record, seq_length, MSV_PROFILE_MODE_LOCAL, &profile_ctx);
-      if (ctx_status != MSV_BRIDGE_OK || profile_ctx == nullptr) {
-        ++stats.bridge_failures;
-        add_failure_sample(&stats, "failed creating profile context for " + case_label);
-        msv_seqrecord_destroy(seq_record);
-        continue;
-      }
-
-      try {
-        AminoAcidAlphabet alphabet;
-        const std::vector<DigitalResidue> digital_sequence = make_digital_sequence_from_bridge(seq_record);
-        HMMProfile cpp_profile = make_profile_from_bridge(profile_ctx, alphabet);
-        DPMatrix cpp_dp = make_dp_matrix_from_bridge(seq_record, profile_ctx);
-
-        float our_score = 0.0f;
-        const int our_status = msv_filter(
-            digital_sequence.data(),
-            seq_length,
-            cpp_profile,
-            cpp_dp,
-            config.expected_hit_count,
-            &our_score);
-
-        if (our_status != 0) {
-          ++stats.filter_failures;
-          add_failure_sample(&stats, case_label + " status mismatch: ours=" + std::to_string(our_status));
-        }
-
-        if (std::isfinite(our_score)) {
-          stats.sum_scores += our_score;
-          ++stats.finite_scores;
-          stats.min_score = std::min(stats.min_score, our_score);
-          stats.max_score = std::max(stats.max_score, our_score);
-        } else {
-          ++stats.nonfinite_scores;
-        }
-      } catch (const std::exception& ex) {
-        ++stats.bridge_failures;
-        add_failure_sample(&stats, case_label + " adapter failure: " + ex.what());
-      }
-
-      ++stats.processed_pairs;
-
-      msv_profilectx_destroy(profile_ctx);
-      msv_seqrecord_destroy(seq_record);
-    }
-
-    msv_seq_reader_close(seq_reader);
-    msv_hmmrecord_destroy(hmm_record);
+    hmms.records.emplace_back(raw_hmm, &msv_hmmrecord_destroy);
   }
 
-  msv_hmm_reader_close(hmm_reader);
-  return stats;
+  if (hmms.records.empty()) {
+    throw std::runtime_error("no HMM records were loaded from: " + config.hmm_path);
+  }
+
+  return hmms;
+}
+
+std::vector<LoadedSequence> load_sequences(const RunConfig& config, const MsvHmmRecord* hmm_record) {
+  using SeqReaderPtr = std::unique_ptr<MsvSeqReader, decltype(&msv_seq_reader_close)>;
+  using SeqRecordPtr = std::unique_ptr<MsvSeqRecord, decltype(&msv_seqrecord_destroy)>;
+
+  MsvSeqReader* raw_reader = nullptr;
+  const int open_status = msv_seq_reader_open(config.fasta_path.c_str(), hmm_record, &raw_reader);
+  if (open_status != MSV_BRIDGE_OK || raw_reader == nullptr) {
+    throw std::runtime_error("failed to open FASTA path: " + config.fasta_path);
+  }
+
+  SeqReaderPtr reader(raw_reader, &msv_seq_reader_close);
+  std::vector<LoadedSequence> sequences;
+  sequences.reserve(static_cast<size_t>(config.max_seqs));
+
+  for (int seq_idx = 0; seq_idx < config.max_seqs; ++seq_idx) {
+    MsvSeqRecord* raw_seq = nullptr;
+    const int next_status = msv_seq_reader_next(reader.get(), &raw_seq);
+    if (next_status == MSV_BRIDGE_EOF) {
+      break;
+    }
+    if (next_status != MSV_BRIDGE_OK || raw_seq == nullptr) {
+      throw std::runtime_error("failed reading sequence: " + std::string(msv_seq_reader_last_error(reader.get())));
+    }
+
+    SeqRecordPtr seq_record(raw_seq, &msv_seqrecord_destroy);
+    sequences.push_back(LoadedSequence{
+        msv_seqrecord_name(seq_record.get()),
+        static_cast<int>(msv_seqrecord_length(seq_record.get())),
+        make_digital_sequence_from_bridge(seq_record.get())});
+  }
+
+  if (sequences.empty()) {
+    throw std::runtime_error("no sequence records were loaded from: " + config.fasta_path);
+  }
+
+  return sequences;
+}
+
+std::vector<std::vector<float>> run_msv_filter_scan(const RunConfig& config) {
+  const LoadedHmms hmms = load_hmms(config);
+  const std::vector<LoadedSequence> sequences = load_sequences(config, hmms.records.front().get());
+
+  AminoAcidAlphabet alphabet;
+  std::vector<std::vector<float>> score_matrix(
+      hmms.records.size(), std::vector<float>(sequences.size(), 0.0f));
+
+
+  for (size_t hmm_idx = 0; hmm_idx < hmms.records.size(); ++hmm_idx) {
+    const MsvHmmRecord* hmm_record = hmms.records[hmm_idx].get();
+
+    for (size_t seq_idx = 0; seq_idx < sequences.size(); ++seq_idx) {
+      const LoadedSequence& sequence = sequences[seq_idx];
+
+      MsvProfileCtx* raw_profile_ctx = nullptr;
+      const int ctx_status = msv_profilectx_create(
+          hmm_record, sequence.length, MSV_PROFILE_MODE_LOCAL, &raw_profile_ctx);
+      if (ctx_status != MSV_BRIDGE_OK || raw_profile_ctx == nullptr) {
+        throw std::runtime_error(
+            "failed creating profile context for " +
+            std::string(msv_hmmrecord_name(hmm_record)) + " vs " + sequence.name);
+      }
+
+      ProfileCtxPtr profile_ctx(raw_profile_ctx, &msv_profilectx_destroy);
+      HMMProfile cpp_profile = make_profile_from_bridge(profile_ctx.get(), alphabet);
+      DPMatrix cpp_dp(msv_hmmrecord_model_length(hmm_record), sequence.length);
+
+      float score = 0.0f;
+      const int status = msv_filter(
+          sequence.residues.data(),
+          sequence.length,
+          cpp_profile,
+          cpp_dp,
+          config.expected_hit_count,
+          &score);
+      if (status != 0) {
+        throw std::runtime_error(
+            "msv_filter failed for " + std::string(msv_hmmrecord_name(hmm_record)) +
+            " vs " + sequence.name);
+      }
+
+      score_matrix[hmm_idx][seq_idx] = score;
+    }
+  }
+
+  return score_matrix;
 }
 
 }  // namespace
@@ -184,33 +187,46 @@ int main() {
   config.fasta_path = get_env_or_default("MSV_ITEST_FASTA_PATH", "inputs/Arabidopsis_thaliana.100.pep.fa");
   config.max_hmms = get_env_int_or_default("MSV_ITEST_MAX_HMMS", 3);
   config.max_seqs = get_env_int_or_default("MSV_ITEST_MAX_SEQS", 25);
+  config.repeats = get_env_int_or_default("MSV_SCAN_REPEATS", 1);
+  config.print_matrix = get_env_int_or_default("MSV_SCAN_PRINT_MATRIX", 0) != 0;
   config.expected_hit_count = get_env_float_or_default("MSV_ITEST_NU", 2.0f);
 
-  if (config.max_hmms <= 0 || config.max_seqs <= 0) {
-    std::cerr << "MSV_ITEST_MAX_HMMS and MSV_ITEST_MAX_SEQS must be > 0\n";
+  if (config.max_hmms <= 0 || config.max_seqs <= 0 || config.repeats <= 0) {
+    std::cerr << "MSV_ITEST_MAX_HMMS, MSV_ITEST_MAX_SEQS, and MSV_SCAN_REPEATS must be > 0\n";
     return EXIT_FAILURE;
   }
 
-  const RunStats stats = run_msv_filter_scan(config);
+  try {
+    std::vector<std::vector<float>> score_matrix;
+    const double start_time = omp_get_wtime();
+    for (int repeat_idx = 0; repeat_idx < config.repeats; ++repeat_idx) {
+      score_matrix = run_msv_filter_scan(config);
+    }
+    const double elapsed_seconds = omp_get_wtime() - start_time;
 
-  std::cout << "[scan] msv_filter summary"
-            << " | hmms=" << stats.processed_hmms
-            << " pairs=" << stats.processed_pairs
-            << " bridge_failures=" << stats.bridge_failures
-            << " filter_failures=" << stats.filter_failures
-            << " finite_scores=" << stats.finite_scores
-            << " nonfinite_scores=" << stats.nonfinite_scores
-            << " sum_scores=" << stats.sum_scores;
+    std::cout << "[scan] score matrix rows=" << score_matrix.size();
+    if (!score_matrix.empty()) {
+      std::cout << " cols=" << score_matrix.front().size();
+    }
+    std::cout << " repeats=" << config.repeats
+              << " elapsed_seconds=" << elapsed_seconds
+              << " average_seconds=" << (elapsed_seconds / static_cast<double>(config.repeats))
+              << "\n";
 
-  if (stats.finite_scores > 0) {
-    std::cout << " min_score=" << stats.min_score
-              << " max_score=" << stats.max_score;
-  }
-
-  std::cout << "\n";
-
-  for (const std::string& sample : stats.failure_samples) {
-    std::cout << "[scan] sample failure: " << sample << "\n";
+    if (config.print_matrix) {
+      for (const std::vector<float>& row : score_matrix) {
+        for (size_t col = 0; col < row.size(); ++col) {
+          if (col > 0) {
+            std::cout << ' ';
+          }
+          std::cout << row[col];
+        }
+        std::cout << "\n";
+      }
+    }
+  } catch (const std::exception& ex) {
+    std::cerr << "msv_filter_scan failed: " << ex.what() << "\n";
+    return EXIT_FAILURE;
   }
 
   return EXIT_SUCCESS;
